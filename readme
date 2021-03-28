@@ -1,0 +1,7 @@
+The bot won't work on your server! If you really want to use it on your server, check all files, and check channels/roles ids.
+
+Required node modules: discord.js; moment; fs; ms; cron; random-puppy; discord-nsfw; quick.db; randomstring
+
+WARNING: You can use it only, when you paste my github link in any (visible for users) place.
+
+Thank you!
