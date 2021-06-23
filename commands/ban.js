@@ -10,7 +10,7 @@ module.exports = {
         const reason = args.slice(1).join(' ');
 
         if (!message.member.hasPermission('BAN_MEMBERS')) {
-            return message.reply('Nie masz permisji, do użycia tej komendy!')
+            return message.reply('Nie masz permisji do użycia tej komendy!')
         }
 
         if (!target) {
@@ -39,27 +39,30 @@ module.exports = {
                 {name:'Powód', value:`${reason || 'nie podano'}`}
             )
         
+        target.ban({
+            reason: `${reason} | Moderator: ${message.member.user.tag}`
+        }).catch(err => {
+            const embed = new Discord.MessageEmbed()
+                .setTitle('ERROR!')
+                .setDescription(`\`\`\`${err}\`\`\``)
+                .setColor('ff0000')
+
+            message.channel.send(embed)
+            return
+        })
+
+
         message.delete()
         message.guild.channels.cache.get(config.logiid).send(log)
 
-        if(!reason){
-            const embed = new Discord.MessageEmbed()
-                .setDescription(`**:white_check_mark: \`${target.user.tag}\` został zbanowany!**`)
-                .setColor('DARK_RED')
 
-            message.channel.send(embed)
-        }else{
-            const embed = new Discord.MessageEmbed()
-                .setDescription(`**:white_check_mark: \`${target.user.tag}\` został zbanowany z powodem \`${rsn}\`**`)
-                .setColor('DARK_RED')
-
-            message.channel.send(embed)           
-        }
+        const embed = new Discord.MessageEmbed()
+            .setDescription(`:white_check_mark: Pomyślnie zbanowano **${target.user.tag}**`)
+            .setColor('DARK_RED')
+            .setTimestamp()
         
+        message.channel.send(embed);
 
-        target.ban({
-            reason: `${reason} | Moderator: ${message.member.user.tag}`
-        })
 
         message.guild.channels.cache.get(config.membercountid).edit({
             name: `👥︱Użytkownicy: ${message.guild.memberCount}`

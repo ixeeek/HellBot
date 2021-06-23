@@ -65,35 +65,12 @@ module.exports = {
             message.guild.channels.cache.get(config.logiid).send(log)
 
 
-        if(!rsn){
-            if (duration === "perm"){
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`**:white_check_mark: \`${target.user.tag}\` został permanentnie wyciszony (na kanałach głosowych)!**`)
-                    .setColor('GREY')
+        const embed = new Discord.MessageEmbed()
+            .setDescription(`:white_check_mark: Pomyślnie wyciszono ${target}`)
+            .setColor('GREY')
+            .setTimestamp()
             
-                message.channel.send(embed)
-            }else{
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`**:white_check_mark: \`${target.user.tag}\` został tymczasowo wyciszony (na kanałach głosowych) na \`${duration}\`**`)
-                    .setColor('GREY')
-            
-                message.channel.send(embed)
-            }
-        }else{
-            if (duration === "perm"){
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`**:white_check_mark: \`${target.user.tag}\` został permanentnie wyciszony (na kanałach głosowych) z powodem \`${rsn}\`**`)
-                    .setColor('GREY')
-            
-                message.channel.send(embed)
-            }else{
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`**:white_check_mark: \`${target.user.tag}\` został tymczasowo wyciszony (na kanałach głosowych) na \`${duration}\` z powodem \`${rsn}\`**`)
-                    .setColor('GREY')
-            
-                message.channel.send(embed)
-            }
-        }
+        message.channel.send(embed);
 
         reason = `${rsn || 'nie podano'} | Moderator: ${message.member.user.tag} | Czas: ${duration}`;
         if(duration === 'perm'){

@@ -46,8 +46,9 @@ module.exports = {
 
         message.delete()
         const embed = new Discord.MessageEmbed()
-            .setDescription(`**:white_check_mark: \`${target.user.tag}\` został odmutowany przez \`${message.member.user.tag}\`**`)
+            .setDescription(`:white_check_mark: Pomyślnie usunięto wyciszenie dla ${target}`)
             .setColor('GREY')
+            .setTimestamp()
 
         reason = `Moderator: ${message.member.user.tag}`;
         target.roles.remove(role.id, reason)

@@ -16,7 +16,7 @@ module.exports = {
                 {name: 'serverinfo', value: 'Użycie: `serverinfo`\nPokazuje podstawowe informacje o serwerze'},
                 {name: 'userinfo', value: 'Użycie: `userinfo [@użytkownik/id]`\nPokazuje podstawowe informacje o użytkowniku.'},
                 {name: 'warnings', value: 'Użycie: `warnings [@użytkownik/id]`\nPokazuje ostrzeżenia użytkownika.'},
-                {name: 'porn', value:'Użycie `porn <rodzaj>`\nKomenda +18, pokazuje obrazek/gifa NSFW zgodnie z podanym rodzajem.`'}
+                {name: 'porn', value:'Użycie `porn <rodzaj>`\nKomenda +18, pokazuje obrazek/gifa NSFW zgodnie z podanym rodzajem.'}
             )
         
         message.channel.send(embed)

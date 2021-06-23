@@ -1,4 +1,6 @@
 const Discord = require('discord.js');
+const fs = require('fs');
+const config = require('../config.json');
 
 module.exports = {
     name: 'nsfw',
@@ -11,7 +13,23 @@ module.exports = {
                 .setColor('RED')
 
             message.delete()
-            message.channel.send(embed).then(msg => {msg.react('🔞')})
+            message.channel.send(embed).then(msg => {
+                msg.react('🔞')
+
+                var msgid = msg.id;
+
+                const file=require('../rolemenu.json');
+    
+                file.nsfw=msgid;
+    
+                const log = new Discord.MessageEmbed()
+                    .setDescription(`Zmieniono ID wiadomosci do nsfw na: \`${msgid}\``)
+                    
+                fs.writeFile('rolemenu.json', JSON.stringify(file, null, 2), function writeJSON(err) {
+                    if (err) return console.log(err);
+                    message.guild.channels.cache.get(config.logiid).send(log)
+                  });
+            })
         } else {
             return
         }

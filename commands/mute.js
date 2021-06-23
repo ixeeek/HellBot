@@ -62,38 +62,14 @@ module.exports = {
                     {name: 'Czas', value: `${duration}`}
                 )
             
-            message.guild.channels.cache.get(config.logiid).send(log)
+        message.guild.channels.cache.get(config.logiid).send(log)
 
-
-        if(!rsn){
-            if (duration === "perm"){
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`**:white_check_mark: \`${target.user.tag}\` został permanentnie wyciszony!**`)
-                    .setColor('AQUA')
+        const embed = new Discord.MessageEmbed()
+            .setDescription(`:white_check_mark: Pomyślnie wyciszono ${target}`)
+            .setColor('DARK_AUQA')
+            .setTimestamp()
             
-                message.channel.send(embed)
-            }else{
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`**:white_check_mark: \`${target.user.tag}\` został tymczasowo wyciszony na \`${duration}\`**`)
-                    .setColor('AQUA')
-            
-                message.channel.send(embed)
-            }
-        }else{
-            if (duration === "perm"){
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`**:white_check_mark: \`${target.user.tag}\` został permanentnie wyciszony z powodem \`${rsn}\`**`)
-                    .setColor('AQUA')
-            
-                message.channel.send(embed)
-            }else{
-                const embed = new Discord.MessageEmbed()
-                    .setDescription(`**:white_check_mark: \`${target.user.tag}\` został tymczasowo wyciszony na \`${duration}\` z powodem \`${rsn}\`**`)
-                    .setColor('AQUA')
-            
-                message.channel.send(embed)
-            }
-        }
+        message.channel.send(embed);
 
         reason = `${rsn || 'nie podano'} | Moderator: ${message.member.user.tag} | Czas: ${duration}`;
         if(duration === 'perm'){
