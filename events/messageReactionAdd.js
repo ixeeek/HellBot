@@ -1,4 +1,5 @@
 const config = require('../config.json');
+const id = require('../rolemenu.json');
 
 module.exports = {
     name: 'messageReactionAdd',
@@ -7,14 +8,14 @@ module.exports = {
         const target = guild.members.cache.get(user.id);
         if(user.bot) return;
 
-        if(reaction.message.id === "820376649576349746"){
+        if(reaction.message.id === id.weryfikacja){
             if(reaction.emoji.name === "✅"){
                 let verifiedrole = guild.roles.cache.find(role => role.id === "747201870518419596");
 
                 reason = `WERYFIKACJA`;
                 target.roles.add(verifiedrole.id, reason)
             }
-        }else if(reaction.message.id === '820377199378169927'){
+        }else if(reaction.message.id === id.main){
             //roles
             let role1 = guild.roles.cache.find(role => role.id === "759421223930298418"); //anime fan
             let role2 = guild.roles.cache.find(role => role.id === "756650341050744832"); //tryhard
@@ -64,11 +65,26 @@ module.exports = {
                     target.send(`**hellup.pl** >> Dodano role: \`${role4.name}\``)
                 }
             }
-        }else if(reaction.message.id === '820377220404478003'){
+        }else if(reaction.message.id === id.nsfw){
             let role = guild.roles.cache.find(role => role.id === "786920137701195786");
 
             reason = 'NSFW REACTION ROLES'
             if(reaction.emoji.name === '🔞'){
+                if(target.roles.cache.has(role.id)){
+                    target.roles.remove(role.id, reason)
+                    reaction.users.remove(user.id);
+                    target.send(`**hellup.pl** >> Usunięto role: \`${role.name}\``)
+                }else{
+                    target.roles.add(role.id, reason)
+                    reaction.users.remove(user.id);
+                    target.send(`**hellup.pl** >> Dodano role: \`${role.name}\``)
+                }
+            }
+        } else if (reaction.message.id === id.ogloszeniamc) {
+            let role = guild.roles.cache.find(role => role.id === '832978918406619136')
+
+            reason = 'Ogłoszenia MC reaction roles';
+            if (reaction.emoji.name === '👁') {
                 if(target.roles.cache.has(role.id)){
                     target.roles.remove(role.id, reason)
                     reaction.users.remove(user.id);
